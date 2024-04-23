@@ -1,4 +1,28 @@
 var currentScene = 0; // Define the initial scene
+var symbols = [
+    "cute/GemOrange",
+    "cute/GemGreen",
+    "cute/GemBlue",
+    "cute/Heart",
+    "cute/Star"
+]; // Define the symbols for the reels
+
+// Define the initial state of the reels
+var reels = [0, 0, 0];
+
+// Define the points variable
+var points = 20;
+
+// Function to spin a single reel
+var spinReel = function(reelIndex) {
+    reels[reelIndex] = floor(random(symbols.length)); // Spin the reel to a random index
+};
+
+var checkWin = function() {
+    return reels[0] === reels[1] && reels[1] === reels[2];
+}; // Function to check if the player wins
+
+
 var drawBitHead = function(bitmojiX, bitmojiY, bitmojiH) {
     var ratio = bitmojiH / 100;
     fill(255, 202, 161);
@@ -54,8 +78,6 @@ var drawBitBody = function(bitmojiX, bitmojiY, bitmojiH) {
     triangle(bitmojiX + 0 * ratio, bitmojiY + 96 * ratio, bitmojiX + 11 * ratio, bitmojiY + 8 * ratio, bitmojiX - 12 * ratio, bitmojiY + 10 * ratio);
 
     fill(58, 226, 252);
-    text("P", bitmojiX - 40 * ratio, bitmojiY + 60 * ratio);
-    text("S", bitmojiX + 25 * ratio, bitmojiY + 60 * ratio);
 
     stroke(66, 66, 66);
     fill(0, 0, 0);
@@ -145,6 +167,26 @@ Button.prototype.handleMouseClick = function() {
         this.onClick();
     }
 };
+
+var mouseClicked = function() {
+    if (currentScene === 1 || 2) {
+        // Check if the mouse is clicked within the specified rectangle
+        if (mouseX >= 153 && mouseX <= 153 + 103 && mouseY >= 259 && mouseY <= 259 + 47) {
+            var hasWon = checkWin();
+            currentScene = 2;
+            for (var i = 0; i < reels.length; i++) {
+                spinReel(i); // Spin reels only if current scene is game screen and mouse is clicked within the rectangle
+            }
+            if (checkWin() && !hasWon) {
+                points += 10; // Add 10 points for winning
+            } else if (!checkWin()) {
+                points -= 1;
+            }
+        }
+    }
+};
+
+
 var startButton = new Button({
     x: 127,
     y: 332,
@@ -167,3 +209,129 @@ var splashScreen = function() {
     drawBitmojiN(-49, 64, 142);
     drawBitmojiS(349, 132, 50);
 }; // Draw the splash screen with text and Bitmoji
+
+var numDrops = 100;
+var xPositions = [];
+var yPositions = [];
+var dropSpeed = [];
+var dropColor = []; //sets up the confetti
+for (var i = 1; i <= numDrops; ++i) {
+    xPositions.push(round(random(10, 390))); //sets random starting x positions for the confetti
+    yPositions.push(round(random(0, 30))); //sets random starting y positions for the confetti
+    dropSpeed.push(round(random(0.5, 5.4))); //makes the confetti have different speeds
+    dropColor.push(color(round(random(0, 255)), round(random(0, 255)), round(random(0, 255)))); //randomizes the confetti color
+}
+
+var pregameScreen = function(){
+
+background(0, 166, 255);
+if (checkWin()) {
+        
+    } else {
+        
+     
+    }
+    // Draw points on the screen
+    fill(255);
+    textSize(20);
+    text("Points: " + points, 20, 20);
+
+    fill(255, 255, 255);
+    strokeWeight(5);
+    rect(25, 80, 110, 110);
+    rect(25 + 120, 80, 110, 110);
+    rect(25 + 240, 80, 110, 110);
+
+    var drawReels = function() {
+        var x = 41;
+        var y = 87;
+        var spacing = 119;
+        for (var i = 0; i < reels.length; i++) {
+            var symbol = symbols[reels[i]];
+            var img = getImage(symbol);
+            image(img, x, y, 80, 80);
+            x += spacing;
+        }
+    };
+
+    drawReels();
+
+    if (checkWin()) {
+
+        fill(255, 255, 0);
+        rect(153, 259, 103, 47);
+        textSize(25);
+        fill(0, 0, 0);
+        text("SPIN", 178, 269);
+
+    } else {
+        fill(255, 255, 0);
+        rect(153, 259, 103, 47);
+        textSize(24);
+        fill(0, 0, 0);
+        text("SPIN", 178, 269);
+
+    }
+};
+
+
+var gameScreen = function() {
+    if (checkWin()) {
+        background(0, 143, 0); // Change background to green if the player wins
+        text("YOU WIN!!", 143, 224);
+        for (var i = 0; i < numDrops; i++) { //confetti function
+            fill(dropColor[i]);
+            strokeWeight(1);
+            ellipse(xPositions[i], yPositions[i], 10, 10);
+            yPositions[i] += dropSpeed[i];
+            if (yPositions[i] > 400) {
+                yPositions[i] = round(random(-129, 0));
+            }
+        }
+    } else {
+        background(255, 0, 0); // Change background to red if the player loses
+        text("YOU LOSE TRY AGAIN!!", 68, 224);
+       
+    }
+    // Draw points on the screen
+    fill(255);
+    textSize(20);
+    text("Points: " + points, 20, 20);
+
+    fill(255, 255, 255);
+    strokeWeight(5);
+    rect(25, 80, 110, 110);
+    rect(25 + 120, 80, 110, 110);
+    rect(25 + 240, 80, 110, 110);
+
+    var drawReels = function() {
+        var x = 41;
+        var y = 87;
+        var spacing = 119;
+        for (var i = 0; i < reels.length; i++) {
+            var symbol = symbols[reels[i]];
+            var img = getImage(symbol);
+            image(img, x, y, 80, 80);
+            x += spacing;
+        }
+    };
+
+    drawReels();
+
+    if (checkWin()) {
+
+        fill(255, 255, 0);
+        rect(153, 259, 103, 47);
+        textSize(25);
+        fill(0, 0, 0);
+        text("SPIN", 178, 269);
+
+    } else {
+        fill(255, 255, 0);
+        rect(153, 259, 103, 47);
+        textSize(24);
+        fill(0, 0, 0);
+        text("SPIN", 178, 269);
+
+    }
+};
