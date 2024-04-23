@@ -1,0 +1,169 @@
+var currentScene = 0; // Define the initial scene
+var drawBitHead = function(bitmojiX, bitmojiY, bitmojiH) {
+    var ratio = bitmojiH / 100;
+    fill(255, 202, 161);
+    ellipse(bitmojiX + 0 * ratio, bitmojiY - 80 * ratio, 116 * ratio, 133 * ratio);
+
+    triangle(bitmojiX + 0 * ratio, bitmojiY - 60 * ratio, bitmojiX + 10 * ratio, bitmojiY - 40 * ratio, bitmojiX - 10 * ratio, bitmojiY - 40 * ratio);
+
+    fill(181, 0, 51);
+    ellipse(bitmojiX + 0 * ratio, bitmojiY - 30 * ratio, 30 * ratio, 8 * ratio);
+
+    fill(58, 226, 252);
+    ellipse(bitmojiX - 25 * ratio, bitmojiY - 80 * ratio, 40 * ratio, 30 * ratio);
+    ellipse(bitmojiX + 25 * ratio, bitmojiY - 80 * ratio, 40 * ratio, 30 * ratio);
+    noStroke();
+    rect(bitmojiX - 35 * ratio, bitmojiY - 95 * ratio, 70 * ratio, 20 * ratio);
+    strokeWeight(5);
+    stroke(58, 226, 252);
+    line(bitmojiX + 60 * ratio, bitmojiY - 90 * ratio, bitmojiX - 60 * ratio, bitmojiY - 90 * ratio);
+};
+
+var drawBitHair = function(bitmojiX, bitmojiY, bitmojiH) {
+    var ratio = bitmojiH / 100;
+
+    strokeWeight(1);
+    stroke(145, 117, 24);
+
+    fill(222, 182, 36);
+    ellipse(bitmojiX + 40 * ratio, bitmojiY - 130 * ratio, 30 * ratio, 30 * ratio);
+    ellipse(bitmojiX - 40 * ratio, bitmojiY - 130 * ratio, 30 * ratio, 30 * ratio);
+    ellipse(bitmojiX + 20 * ratio, bitmojiY - 140 * ratio, 30 * ratio, 30 * ratio);
+    ellipse(bitmojiX - 20 * ratio, bitmojiY - 140 * ratio, 30 * ratio, 30 * ratio);
+    ellipse(bitmojiX - 10 * ratio, bitmojiY - 138 * ratio, 30 * ratio, 30 * ratio);
+    ellipse(bitmojiX + 10 * ratio, bitmojiY - 138 * ratio, 30 * ratio, 30 * ratio);
+    ellipse(bitmojiX + 0 * ratio, bitmojiY - 150 * ratio, 30 * ratio, 30 * ratio);
+};
+
+var drawBitNeck = function(bitmojiX, bitmojiY, bitmojiH) {
+    var ratio = bitmojiH / 100;
+    fill(255, 202, 161);
+    rect(bitmojiX - 12 * ratio, bitmojiY - 14 * ratio, 21 * ratio, 17 * ratio);
+};
+
+var drawBitBody = function(bitmojiX, bitmojiY, bitmojiH) {
+    var ratio = bitmojiH / 100;
+    stroke(0, 0, 0);
+    fill(0, 0, 0);
+    rect(bitmojiX - 50 * ratio, bitmojiY + 0 * ratio, 100 * ratio, 100 * ratio);
+
+    fill(255, 255, 255);
+    triangle(bitmojiX + 30 * ratio, bitmojiY + 0 * ratio, bitmojiX - 30 * ratio, bitmojiY + 0 * ratio, bitmojiX + 0 * ratio, bitmojiY + 100 * ratio);
+
+    fill(0, 0, 0);
+    triangle(bitmojiX + 0 * ratio, bitmojiY + 96 * ratio, bitmojiX + 11 * ratio, bitmojiY + 8 * ratio, bitmojiX - 12 * ratio, bitmojiY + 10 * ratio);
+
+    fill(58, 226, 252);
+    text("P", bitmojiX - 40 * ratio, bitmojiY + 60 * ratio);
+    text("S", bitmojiX + 25 * ratio, bitmojiY + 60 * ratio);
+
+    stroke(66, 66, 66);
+    fill(0, 0, 0);
+    quad(bitmojiX + 0 * ratio, bitmojiY + 20 * ratio, bitmojiX + 15 * ratio, bitmojiY + 10 * ratio, bitmojiX + 0 * ratio, bitmojiY + 0 * ratio, bitmojiX - 15 * ratio, bitmojiY + 10 * ratio);
+};
+
+var drawBitArms = function(bitmojiX, bitmojiY, bitmojiH) {
+    var ratio = bitmojiH / 100;
+    strokeWeight(20 * ratio);
+    stroke(0, 0, 0);
+
+    line(bitmojiX - 80 * ratio, bitmojiY + 110 * ratio, bitmojiX - 50 * ratio, bitmojiY + 8 * ratio);
+    line(bitmojiX + 80 * ratio, bitmojiY + 110 * ratio, bitmojiX + 50 * ratio, bitmojiY + 8 * ratio);
+};
+
+var drawBitmojiS = function(bitmojiX, bitmojiY, bitmojiH) {
+    strokeWeight(1);
+    var ratio = bitmojiH / 100;
+    drawBitHead(bitmojiX, bitmojiY, bitmojiH);
+    drawBitBody(bitmojiX, bitmojiY, bitmojiH);
+    drawBitHair(bitmojiX, bitmojiY, bitmojiH);
+    drawBitNeck(bitmojiX, bitmojiY, bitmojiH);
+    drawBitArms(bitmojiX, bitmojiY, bitmojiH);
+};
+
+var drawBitmojiHead = function(bX, bY, bH) {
+    var ratio = bH / 100;
+    strokeWeight(1);
+    fill(255, 231, 133);
+    ellipse(bX + 75 * ratio, bY + 60 * ratio, 57 * ratio, 70 * ratio);
+    arc(bX + 62 * ratio, bY + 67 * ratio, 39 * ratio, -18 * ratio, -36, 58);
+
+    arc(bX + 76 * ratio, bY + 80 * ratio, 21 * ratio, -12 * ratio, -172, -8);
+    fill(255, 255, 255);
+    ellipse(bX + 63 * ratio, bY + 55 * ratio, 11 * ratio, 8 * ratio);
+    ellipse(bX + 85 * ratio, bY + 55 * ratio, 11 * ratio, 8 * ratio);
+    fill(0, 0, 0);
+    ellipse(bX + 64 * ratio, bY + 55 * ratio, 3 * ratio, 3 * ratio);
+    ellipse(bX + 86 * ratio, bY + 55 * ratio, 3 * ratio, 3 * ratio);
+
+    fill(158, 74, 0);
+    quad(bX + 41 * ratio, bY + 47 * ratio, bX + 112 * ratio, bY + 47 * ratio, bX + 98 * ratio, bY + 35 * ratio, bX + 54 * ratio, bY + 28 * ratio);
+    strokeWeight(1);
+    fill(255, 255, 255);
+    rect(bX + 48 * ratio, bY + 0 * ratio, 53 * ratio, 42 * ratio);
+    line(bX + 73 * ratio, bY + 24 * ratio, bX + 73 * ratio, bY + 1 * ratio);
+    line(bX + 83 * ratio, bY + 24 * ratio, bX + 83 * ratio, bY + 1 * ratio);
+    line(bX + 93 * ratio, bY + 24 * ratio, bX + 93 * ratio, bY + 1 * ratio);
+    line(bX + 65 * ratio, bY + 24 * ratio, bX + 65 * ratio, bY + 1 * ratio);
+    line(bX + 56 * ratio, bY + 24 * ratio, bX + 56 * ratio, bY + 1 * ratio);
+    line(bX + 48 * ratio, bY + 24 * ratio, bX + 100 * ratio, bY + 24 * ratio);
+};
+
+var drawBitmojiN = function(bX, bY, bH) {
+    var ratio = bH / 100;
+    drawBitmojiHead(bX, bY, bH);
+};
+
+var Button = function(config) {
+    this.x = config.x || 0;
+    this.y = config.y || 0;
+    this.width = config.width || 150;
+    this.height = config.height || 50;
+    this.label = config.label || "Click";
+    this.onClick = config.onClick || function() {};
+};
+
+Button.prototype.draw = function() {
+    strokeWeight(4);
+    fill(255, 0, 0);
+    rect(this.x, this.y, this.width, this.height, 5);
+    fill(0, 0, 0);
+    textSize(19);
+    textAlign(LEFT, TOP);
+    text(this.label, this.x + 10, this.y + this.height / 4);
+};
+
+Button.prototype.isMouseInside = function() {
+    return mouseX > this.x &&
+        mouseX < (this.x + this.width) &&
+        mouseY > this.y &&
+        mouseY < (this.y + this.height);
+};
+
+Button.prototype.handleMouseClick = function() {
+    if (this.isMouseInside()) {
+        this.onClick();
+    }
+};
+var startButton = new Button({
+    x: 127,
+    y: 332,
+    label: "Start",
+    onClick: function() {
+        currentScene = 1; // Change scene to game screen when button is clicked
+    }
+});
+
+var splashScreen = function() {
+    background(0, 156, 18);
+    fill(0, 0, 0);
+    textSize(25);
+    text("Nicholas Pitrone & Patrick Smith", 112, 141, 201, 300);
+    textSize(40);
+    text("SLOTS", 134, 85);
+    textSize(18);
+    text("Play Our Three Slot, Slot Machine For a Chance to WIN BIG!!!", 72, 230, 280, 220);
+    startButton.draw();
+    drawBitmojiN(-49, 64, 142);
+    drawBitmojiS(349, 132, 50);
+}; // Draw the splash screen with text and Bitmoji
