@@ -335,3 +335,22 @@ var gameScreen = function() {
 
     }
 };
+var restartButton = new Button({
+    x: 137,
+    y: 214,
+    label: "Restart",
+    onClick: function() {
+        currentScene = 0; // Change scene to splash screen when button is clicked
+        points = 20; // Reset points
+    }
+});
+
+
+var endScreen = function(){
+    background(119, 0, 255);
+    textSize(50);
+    text("Better Luck Next time!!!",76,16,356,133);
+    drawBitmojiN(-55,210,162);
+    drawBitmojiS(349, 298, 50);
+    restartButton.draw(); // Draw the restart button
+};
