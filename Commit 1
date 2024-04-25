@@ -354,3 +354,28 @@ var endScreen = function(){
     drawBitmojiS(349, 298, 50);
     restartButton.draw(); // Draw the restart button
 };
+
+draw = function() {
+    if (currentScene === 0) {
+        splashScreen();
+    } else if (currentScene === 1) {
+        pregameScreen();
+    } else if (currentScene === 2) {
+        gameScreen();
+    } else if (currentScene === 3) {
+        endScreen();
+    }
+    if (mouseIsPressed) {
+        if (currentScene === 0) {
+            startButton.handleMouseClick();
+        } else if (currentScene === 3) {
+            restartButton.handleMouseClick();
+            currentScene = 0; // Change scene to splash screen when restart button is clicked
+        }
+    }
+    
+    if (points === 0) {
+        currentScene = 3; // Change scene to end screen when points reach 0
+    }
+};
+
